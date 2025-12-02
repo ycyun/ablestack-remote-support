@@ -2,6 +2,15 @@ name: Full Flutter CI
 
 on:
   workflow_dispatch:
+    inputs:
+      upload-artifact:
+        description: 'Whether to upload build artifacts'
+        required: true
+        default: 'true'
+      upload-tag:
+        description: 'The tag name to use for the build'
+        required: false
+        default: 'test'
   pull_request:
     paths-ignore:
     - "docs/**"
@@ -21,4 +30,4 @@ jobs:
   run-ci:
     uses: ./.github/workflows/flutter-build.yml
     with:
-      upload-artifact: false
+      upload-artifact: true
