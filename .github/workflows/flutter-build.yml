@@ -46,14 +46,13 @@ env:
   MACOS_P12_BASE64: "${{ secrets.MACOS_P12_BASE64 }}"
   UPLOAD_ARTIFACT: "${{ inputs.upload-artifact }}"
   SIGN_BASE_URL: "${{ secrets.SIGN_BASE_URL }}"
-  ANDROID_ALIAS              =: "${{ secrets.ANDROID_ALIAS }}"
-  ANDROID_KEY_PASSWORD       =: "${{ secrets.ANDROID_KEY_PASSWORD }}"
-  ANDROID_KEY_STORE_PASSWORD =: "${{ secrets.MACOS_P12_BASE64 }}"
-  ANDROID_SIGNING_KEY        =: "${{ secrets.ANDROID_SIGNING_KEY }}"
-  MACOS_CODESIGN_IDENTITY    =: "${{ secrets.MACOS_CODESIGN_IDENTITY }}"
-  MACOS_NOTARIZE_JSON        =: "${{ secrets.MACOS_NOTARIZE_JSON }}"
-  MACOS_P12_BASE64           =: "${{ secrets.MACOS_P12_BASE64 }}"
-  MACOS_P12_PASSWORD         =: "${{ secrets.MACOS_P12_BASE64 }}"
+  SIGN_SECRET_KEY: "${{ secrets.SIGN_SECRET_KEY }}"
+  ANDROID_ALIAS              : "${{ secrets.ANDROID_ALIAS }}"
+  ANDROID_KEY_PASSWORD       : "${{ secrets.ANDROID_KEY_PASSWORD }}"
+  ANDROID_KEY_STORE_PASSWORD : "${{ secrets.MACOS_P12_BASE64 }}"
+  MACOS_CODESIGN_IDENTITY    : "${{ secrets.MACOS_CODESIGN_IDENTITY }}"
+  MACOS_NOTARIZE_JSON        : "${{ secrets.MACOS_NOTARIZE_JSON }}"
+  MACOS_P12_PASSWORD         : "${{ secrets.MACOS_P12_BASE64 }}"
 
 jobs:
   infomation:
@@ -65,18 +64,19 @@ jobs:
       - name: Show build info
         run: |
           echo "UPLOAD_ARTIFACT=${{ inputs.upload-artifact }}"
-          echo "SIGN_BASE_URL is set: ${SIGN_BASE_URL != ''}"
           echo "TAG_NAME=${{ inputs.upload-tag }}"
           echo "VERSION=${{ env.VERSION }}"
           echo "FLUTTER_VERSION=${{ env.FLUTTER_VERSION }}"
-          echo "ANDROID_ALIAS               is set: ${ANDROID_ALIAS != ''}"
-          echo "ANDROID_KEY_PASSWORD        is set: ${ANDROID_KEY_PASSWORD != ''}"
-          echo "ANDROID_KEY_STORE_PASSWORD  is set: ${MACOS_P12_BASE64 != ''}"
-          echo "ANDROID_SIGNING_KEY         is set: ${ANDROID_SIGNING_KEY != ''}"
-          echo "MACOS_CODESIGN_IDENTITY     is set: ${MACOS_CODESIGN_IDENTITY != ''}"
-          echo "MACOS_NOTARIZE_JSON         is set: ${MACOS_NOTARIZE_JSON != ''}"
-          echo "MACOS_P12_BASE64            is set: ${MACOS_P12_BASE64 != ''}"
-          echo "MACOS_P12_PASSWORD          is set: ${MACOS_P12_BASE64 != ''}"
+          echo "SIGN_BASE_URL               is set: ${{ secrets.SIGN_BASE_URL }}"
+          echo "SIGN_SECRET_KEY             is set: ${{ secrets.SIGN_SECRET_KEY }}"
+          echo "ANDROID_ALIAS               is set: ${{ secrets.ANDROID_ALIAS }}"
+          echo "ANDROID_KEY_PASSWORD        is set: ${{ secrets.ANDROID_KEY_PASSWORD }}"
+          echo "ANDROID_KEY_STORE_PASSWORD  is set: ${{ secrets.MACOS_P12_BASE64 }}"
+          echo "ANDROID_SIGNING_KEY         is set: ${{ secrets.ANDROID_SIGNING_KEY }}"
+          echo "MACOS_CODESIGN_IDENTITY     is set: ${{ secrets.MACOS_CODESIGN_IDENTITY }}"
+          echo "MACOS_NOTARIZE_JSON         is set: ${{ secrets.MACOS_NOTARIZE_JSON }}"
+          echo "MACOS_P12_BASE64            is set: ${{ secrets.MACOS_P12_BASE64 }}"
+          echo "MACOS_P12_PASSWORD          is set: ${{ secrets.MACOS_P12_BASE64 }}"
     
   generate-bridge:
     uses: ./.github/workflows/bridge.yml
