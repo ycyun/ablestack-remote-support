@@ -48,28 +48,34 @@ jobs:
     steps:
       - name: Show build info
         run: |
-          echo "UPLOAD_ARTIFACT=${{ inputs.upload-artifact }}"
-          echo "TAG_NAME=${{ inputs.upload-tag }}"
-          echo "VERSION=${{ env.VERSION }}"
-          echo "FLUTTER_VERSION=${{ env.FLUTTER_VERSION }}"
-          echo "SIGN_BASE_URL               is set: ${{ secrets.SIGN_BASE_URL }}"
-          echo "SIGN_SECRET_KEY             is set: ${{ secrets.SIGN_SECRET_KEY }}"
-          echo "ANDROID_ALIAS               is set: ${{ secrets.ANDROID_ALIAS }}"
-          echo "ANDROID_KEY_PASSWORD        is set: ${{ secrets.ANDROID_KEY_PASSWORD }}"
-          echo "ANDROID_KEY_STORE_PASSWORD  is set: ${{ secrets.MACOS_P12_BASE64 }}"
-          echo "ANDROID_SIGNING_KEY         is set: ${{ secrets.ANDROID_SIGNING_KEY }}"
-          echo "MACOS_CODESIGN_IDENTITY     is set: ${{ secrets.MACOS_CODESIGN_IDENTITY }}"
-          echo "MACOS_NOTARIZE_JSON         is set: ${{ secrets.MACOS_NOTARIZE_JSON }}"
-          echo "MACOS_P12_BASE64            is set: ${{ secrets.MACOS_P12_BASE64 }}"
-          echo "MACOS_P12_PASSWORD          is set: ${{ secrets.MACOS_P12_BASE64 }}"
-          echo "SIGN_BASE_URL               is set: ${{ env.SIGN_BASE_URL }}"
-          echo "SIGN_SECRET_KEY             is set: ${{ env.SIGN_SECRET_KEY }}"
-          echo "ANDROID_ALIAS               is set: ${{ env.ANDROID_ALIAS }}"
-          echo "ANDROID_KEY_PASSWORD        is set: ${{ env.ANDROID_KEY_PASSWORD }}"
-          echo "ANDROID_KEY_STORE_PASSWORD  is set: ${{ env.MACOS_P12_BASE64 }}"
-          echo "ANDROID_SIGNING_KEY         is set: ${{ env.ANDROID_SIGNING_KEY }}"
-          echo "MACOS_CODESIGN_IDENTITY     is set: ${{ env.MACOS_CODESIGN_IDENTITY }}"
-          echo "MACOS_NOTARIZE_JSON         is set: ${{ env.MACOS_NOTARIZE_JSON }}"
-          echo "MACOS_P12_BASE64            is set: ${{ env.MACOS_P12_BASE64 }}"
-          echo "MACOS_P12_PASSWORD          is set: ${{ env.MACOS_P12_BASE64 }}"
-    
+          echo "UPLOAD_ARTIFACT=${{ inputs.upload-artifact }}"                                | tee sample.txt
+          echo "TAG_NAME=${{ inputs.upload-tag }}"                                            | tee -a sample.txt
+          echo "VERSION=${{ env.VERSION }}"                                                   | tee -a sample.txt
+          echo "FLUTTER_VERSION=${{ env.FLUTTER_VERSION }}"                                   | tee -a sample.txt
+          echo "SIGN_BASE_URL               is set: ${{ secrets.SIGN_BASE_URL }}"             | tee -a sample.txt
+          echo "SIGN_SECRET_KEY             is set: ${{ secrets.SIGN_SECRET_KEY }}"           | tee -a sample.txt
+          echo "ANDROID_ALIAS               is set: ${{ secrets.ANDROID_ALIAS }}"             | tee -a sample.txt
+          echo "ANDROID_KEY_PASSWORD        is set: ${{ secrets.ANDROID_KEY_PASSWORD }}"      | tee -a sample.txt
+          echo "ANDROID_KEY_STORE_PASSWORD  is set: ${{ secrets.MACOS_P12_BASE64 }}"          | tee -a sample.txt
+          echo "ANDROID_SIGNING_KEY         is set: ${{ secrets.ANDROID_SIGNING_KEY }}"       | tee -a sample.txt
+          echo "MACOS_CODESIGN_IDENTITY     is set: ${{ secrets.MACOS_CODESIGN_IDENTITY }}"   | tee -a sample.txt
+          echo "MACOS_NOTARIZE_JSON         is set: ${{ secrets.MACOS_NOTARIZE_JSON }}"       | tee -a sample.txt
+          echo "MACOS_P12_BASE64            is set: ${{ secrets.MACOS_P12_BASE64 }}"          | tee -a sample.txt
+          echo "MACOS_P12_PASSWORD          is set: ${{ secrets.MACOS_P12_BASE64 }}"          | tee -a sample.txt
+          echo "SIGN_BASE_URL               is set: ${{ env.SIGN_BASE_URL }}"                 | tee -a sample.txt
+          echo "SIGN_SECRET_KEY             is set: ${{ env.SIGN_SECRET_KEY }}"               | tee -a sample.txt
+          echo "ANDROID_ALIAS               is set: ${{ env.ANDROID_ALIAS }}"                 | tee -a sample.txt
+          echo "ANDROID_KEY_PASSWORD        is set: ${{ env.ANDROID_KEY_PASSWORD }}"          | tee -a sample.txt
+          echo "ANDROID_KEY_STORE_PASSWORD  is set: ${{ env.MACOS_P12_BASE64 }}"              | tee -a sample.txt
+          echo "ANDROID_SIGNING_KEY         is set: ${{ env.ANDROID_SIGNING_KEY }}"           | tee -a sample.txt
+          echo "MACOS_CODESIGN_IDENTITY     is set: ${{ env.MACOS_CODESIGN_IDENTITY }}"       | tee -a sample.txt
+          echo "MACOS_NOTARIZE_JSON         is set: ${{ env.MACOS_NOTARIZE_JSON }}"           | tee -a sample.txt
+          echo "MACOS_P12_BASE64            is set: ${{ env.MACOS_P12_BASE64 }}"              | tee -a sample.txt
+          echo "MACOS_P12_PASSWORD          is set: ${{ env.MACOS_P12_BASE64 }}"              | tee -a sample.txt
+      - name: Publish Release
+        if: env.UPLOAD_ARTIFACT == 'true'
+        with:
+          prerelease: true
+          tag_name: ${{ env.TAG_NAME }}
+          files: |
+            ./sample.txt
