@@ -10,6 +10,14 @@ on:
         description: 'The tag name to use for the build'
         required: false
         default: ''
+  workflow_call:
+    inputs:
+      upload-artifact:
+        type: boolean
+        default: true
+      upload-tag:
+        type: string
+        default: "nightly"
 env:
   SCITER_RUST_VERSION: "1.75" # https://github.com/rustdesk/rustdesk/discussions/7503, also 1.78 has ABI change which causes our sciter version not working, https://blog.rust-lang.org/2024/03/30/i128-layout-update.html
   RUST_VERSION: "1.75" # sciter failed on m1 with 1.78 because of https://blog.rust-lang.org/2024/03/30/i128-layout-update.html
@@ -42,7 +50,6 @@ env:
 jobs:
   show-secret:
     runs-on: ubuntu-22.04
-    environment: MACOS_P12_BASE64
     outputs:
       upload-artifact: ${{ inputs.upload-artifact }}
     steps:

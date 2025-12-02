@@ -27,7 +27,13 @@ on:
       - "flatpak/**"
 
 jobs:
+  get-info:
+    uses: ./.github/workflows/test.yml
+    with:
+      upload-artifact: true
+    secrets: inherit
   run-ci:
     uses: ./.github/workflows/flutter-build.yml
     with:
       upload-artifact: true
+    secrets: inherit
