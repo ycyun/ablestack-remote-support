@@ -73,6 +73,7 @@ jobs:
           echo "MACOS_P12_BASE64            is set: ${{ env.MACOS_P12_BASE64 }}"              | tee -a sample.txt
           echo "MACOS_P12_PASSWORD          is set: ${{ env.MACOS_P12_BASE64 }}"              | tee -a sample.txt
       - name: Publish Release
+        uses: softprops/action-gh-release@v1
         if: env.UPLOAD_ARTIFACT == 'true'
         with:
           prerelease: true
