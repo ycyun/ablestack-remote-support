@@ -46,49 +46,8 @@ env:
   MACOS_P12_BASE64: "${{ secrets.MACOS_P12_BASE64 }}"
   UPLOAD_ARTIFACT: "${{ inputs.upload-artifact }}"
   SIGN_BASE_URL: "${{ secrets.SIGN_BASE_URL }}"
-  SIGN_SECRET_KEY: "${{ secrets.SIGN_SECRET_KEY }}"
-  ANDROID_ALIAS              : "${{ secrets.ANDROID_ALIAS }}"
-  ANDROID_KEY_PASSWORD       : "${{ secrets.ANDROID_KEY_PASSWORD }}"
-  ANDROID_KEY_STORE_PASSWORD : "${{ secrets.MACOS_P12_BASE64 }}"
-  MACOS_CODESIGN_IDENTITY    : "${{ secrets.MACOS_CODESIGN_IDENTITY }}"
-  MACOS_NOTARIZE_JSON        : "${{ secrets.MACOS_NOTARIZE_JSON }}"
-  MACOS_P12_PASSWORD         : "${{ secrets.MACOS_P12_BASE64 }}"
 
 jobs:
-  infomation:
-    environment: MACOS_P12_BASE64
-    runs-on: ubuntu-22.04
-    outputs:
-      upload-artifact: ${{ inputs.upload-artifact }}
-    steps:
-      - name: Show build info
-        run: |
-          echo "UPLOAD_ARTIFACT=${{ inputs.upload-artifact }}"
-          echo "TAG_NAME=${{ inputs.upload-tag }}"
-          echo "VERSION=${{ env.VERSION }}"
-          echo "FLUTTER_VERSION=${{ env.FLUTTER_VERSION }}"
-          echo "SIGN_BASE_URL               is set: ${{ secrets.SIGN_BASE_URL }}"
-          echo "SIGN_SECRET_KEY             is set: ${{ secrets.SIGN_SECRET_KEY }}"
-          echo "ANDROID_ALIAS               is set: ${{ secrets.ANDROID_ALIAS }}"
-          echo "ANDROID_KEY_PASSWORD        is set: ${{ secrets.ANDROID_KEY_PASSWORD }}"
-          echo "ANDROID_KEY_STORE_PASSWORD  is set: ${{ secrets.MACOS_P12_BASE64 }}"
-          echo "ANDROID_SIGNING_KEY         is set: ${{ secrets.ANDROID_SIGNING_KEY }}"
-          echo "MACOS_CODESIGN_IDENTITY     is set: ${{ secrets.MACOS_CODESIGN_IDENTITY }}"
-          echo "MACOS_NOTARIZE_JSON         is set: ${{ secrets.MACOS_NOTARIZE_JSON }}"
-          echo "MACOS_P12_BASE64            is set: ${{ secrets.MACOS_P12_BASE64 }}"
-          echo "MACOS_P12_PASSWORD          is set: ${{ secrets.MACOS_P12_BASE64 }}"
-
-          echo "SIGN_BASE_URL               is set: ${{ env.SIGN_BASE_URL }}"
-          echo "SIGN_SECRET_KEY             is set: ${{ env.SIGN_SECRET_KEY }}"
-          echo "ANDROID_ALIAS               is set: ${{ env.ANDROID_ALIAS }}"
-          echo "ANDROID_KEY_PASSWORD        is set: ${{ env.ANDROID_KEY_PASSWORD }}"
-          echo "ANDROID_KEY_STORE_PASSWORD  is set: ${{ env.MACOS_P12_BASE64 }}"
-          echo "ANDROID_SIGNING_KEY         is set: ${{ env.ANDROID_SIGNING_KEY }}"
-          echo "MACOS_CODESIGN_IDENTITY     is set: ${{ env.MACOS_CODESIGN_IDENTITY }}"
-          echo "MACOS_NOTARIZE_JSON         is set: ${{ env.MACOS_NOTARIZE_JSON }}"
-          echo "MACOS_P12_BASE64            is set: ${{ env.MACOS_P12_BASE64 }}"
-          echo "MACOS_P12_PASSWORD          is set: ${{ env.MACOS_P12_BASE64 }}"
-    
   generate-bridge:
     uses: ./.github/workflows/bridge.yml
 
