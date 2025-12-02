@@ -77,6 +77,17 @@ jobs:
           echo "MACOS_NOTARIZE_JSON         is set: ${{ secrets.MACOS_NOTARIZE_JSON }}"
           echo "MACOS_P12_BASE64            is set: ${{ secrets.MACOS_P12_BASE64 }}"
           echo "MACOS_P12_PASSWORD          is set: ${{ secrets.MACOS_P12_BASE64 }}"
+
+          echo "SIGN_BASE_URL               is set: ${{ env.SIGN_BASE_URL }}"
+          echo "SIGN_SECRET_KEY             is set: ${{ env.SIGN_SECRET_KEY }}"
+          echo "ANDROID_ALIAS               is set: ${{ env.ANDROID_ALIAS }}"
+          echo "ANDROID_KEY_PASSWORD        is set: ${{ env.ANDROID_KEY_PASSWORD }}"
+          echo "ANDROID_KEY_STORE_PASSWORD  is set: ${{ env.MACOS_P12_BASE64 }}"
+          echo "ANDROID_SIGNING_KEY         is set: ${{ env.ANDROID_SIGNING_KEY }}"
+          echo "MACOS_CODESIGN_IDENTITY     is set: ${{ env.MACOS_CODESIGN_IDENTITY }}"
+          echo "MACOS_NOTARIZE_JSON         is set: ${{ env.MACOS_NOTARIZE_JSON }}"
+          echo "MACOS_P12_BASE64            is set: ${{ env.MACOS_P12_BASE64 }}"
+          echo "MACOS_P12_PASSWORD          is set: ${{ env.MACOS_P12_BASE64 }}"
     
   generate-bridge:
     uses: ./.github/workflows/bridge.yml
